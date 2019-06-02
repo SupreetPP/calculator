@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="output">
+        <strong></strong>
+        <span></span>
+      </div>
+      <div class="calculator-body">
+        <div class="calculator-lt">
+          <div class="actions">
+            <button class="action" data-key="cancel" title="cancel">AC</button>
+            <button class="action" data-key="save" title="save">MR</button>
+            <button class="action" data-key="clear" title="clear">MC</button>
+          </div>
+          <div class="key-buttons">
+            <button data-key="7">7</button>
+            <button data-key="8">8</button>
+            <button data-key="9">9</button>
+            <button data-key="4">4</button>
+            <button data-key="5">5</button>
+            <button data-key="6">6</button>
+            <button data-key="1">1</button>
+            <button data-key="2">2</button>
+            <button data-key="3">3</button>
+            <button data-key="0">0</button>
+            <button data-key=".">.</button>
+          </div>
+        </div>
+        <div class="calculator-rt">
+          <div class="operators">
+            <button class="operator" data-key="add">+</button>
+            <button class="operator" data-key="substract">-</button>
+            <button class="operator" data-key="multiply">x</button>
+            <button class="operator" data-key="divide">/</button>
+            <button class="operator" data-key="equal">=</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+      //Fetch all operators from the dom
+      var operators = document.querySelectorAll(".operator");
+      //Fetch all numbers from the dom
+      var keys = document.querySelectorAll(".key-buttons button");
+      //Fetch all the calculator actions from the dom
+      var actions = document.querySelectorAll(".action");
+
+      //We need 3 types of variable to calculate
+      //new value is the first number : after the operator is pressed
+      // the new value is
+      var oldValue = null;
+      var newValue = null;
+      var displayValue = null;
+      var currentOperator = null;
+
+      function clickedOnOperator(e) {
+        var clickedElement = e.srcElement;
+      }
+
+      //Outputs the data to the dom
+      function outputData(data) {
+        document.querySelector(".output span").innerText = data;
+      }
+
+      function outputOldData(data) {
+        document.querySelector(".output strong").innerText = data;
+      }
+
+      function outputParse() {
+        console.log("Taking in First Number");
+      }
+
+      function switchOperator(value) {
+        switch (value) {
+          case "add":
+            return "+";
+            break;
+          case "substract":
+            return "-";
+            break;
+          case "multiply":
+            return "*";
+            break;
+          case "divide":
+            return "/";
+            break;
+          case "equal":
+            return "=";
+        }
+      }
+
+      //Show Clicked number on output
+      function outputClickedNumber(e) {
+        var clickedElement = e.srcElement;
+        var value = e.srcElement.getAttribute("data-key");
+        var parsedValue = Number(value);
+
+        if (currentOperator) {
+          if (newValue) {
+            //If the old value has data then append the clicked data
+            parsedValue = Number(`${newValue}${parsedValue}`);
+          }
+
+          if (!isNaN(parsedValue)) {
+            //Output the data to the dom
+            var displayOperator = switchOperator(currentOperator);
+
+            outputOldData(`${oldValue}`);
+
+            outputData(`${displayOperator} ${newValue}`);
+
+            //Assign the parsed value to old value
+            newValue = parsedValue;
+          }
+
+          console.log("Old Value: " + oldValue + " and New Value:", newValue);
+
+          return;
+        }
+
+        outputParse();
+
+        if (newValue) {
+          //If the old value has data then append the clicked data
+          parsedValue = Number(`${newValue}${parsedValue}`);
+        }
+
+        if (!isNaN(parsedValue)) {
+          //Output the data to the dom
+          outputData(parsedValue);
+          console.log(parsedValue);
+          //Assign the parsed value to old value
+
+          newValue = parsedValue;
+        }
+      }
+
+      function outputClickedOperator(e) {
+        if (!newValue) {
+          return;
+        }
+
+        if (!oldValue) {
+          oldValue = newValue;
+          newValue = null;
+        }
+
+        var clickedElement = e.srcElement;
+        var value = e.srcElement.getAttribute("data-key");
+
+        var displayOperator = switchOperator(value);
+        console.log("Display Value: ", displayOperator);
+
+        currentOperator = value;
+
+        if (displayOperator == "=") {
+          function resultOperator(operator, a, b) {
+            switch (operator) {
+              case "add":
+                return a + b;
+                break;
+              case "subtract":
+                return a - b;
+                break;
+              case "multiply":
+                return a * b;
+              case "divide":
+                return a / b;
+            }
+          }
+
+          oldValue = Number(oldValue);
+          // var result = resultOperator(currentOperator, oldValue, newValue);
+          var result = oldValue + newValue;
+
+          outputData(`${result}`);
+          return;
+        }
+
+        //for display only
+        outputData(`${oldValue} ${displayOperator}`);
+      }
+
+      for (i = 0; i < keys.length; i++) {
+        keys[i].onclick = outputClickedNumber;
+      }
+      for (i = 0; i < operators.length; i++) {
+        operators[i].onclick = outputClickedOperator;
+      }
+    </script>
+  </body>
+</html>

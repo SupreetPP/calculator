@@ -1,0 +1,167 @@
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  background-color: #1e2326;
+}
+
+button {
+  position: relative;
+  font-family: Poppins;
+  font-size: 2.5rem;
+  font-weight: 300;
+  padding: 2rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-width: 0 1px 1px 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+button:hover {
+  z-index: 1;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  font-weight: 700;
+}
+
+.calculator {
+  max-width: 40rem;
+  margin: 8rem auto;
+  -webkit-box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.4);
+}
+
+.calculator-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.calculator-lt {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.calculator-lt button {
+  color: #fff;
+  background-color: #1e2326;
+}
+
+.calculator-rt {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.output {
+  position: relative;
+  width: 100%;
+  height: 12rem;
+  border: 1px solid #000;
+  color: #1e2326;
+  background-color: #fff;
+}
+
+.output strong,
+.output span {
+  position: absolute;
+  font-family: Poppins;
+  font-size: 2rem;
+}
+
+.output strong {
+  top: 2rem;
+  right: 2rem;
+}
+
+.output span {
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 2.7rem;
+  font-weight: 700;
+}
+
+.actions {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.actions button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.actions button:hover {
+  color: #1e2326;
+  background-color: #fec208;
+}
+
+.key-buttons {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.key-buttons button {
+  width: 33.333333%;
+}
+
+.key-buttons button[data-key="0"] {
+  width: 66.666666%;
+}
+
+.key-buttons button:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.key-buttons button:hover {
+  color: #1e2326;
+  background-color: #fec208;
+}
+
+.operators {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.operators button {
+  color: #fff;
+  background-color: #5e4bb6;
+  border-right: 0;
+}
+
+.operators button[data-key="equal"] {
+  color: #1e2326;
+  background-color: #fec208;
+}
+
+.operators button:last-child {
+  border-bottom: 0;
+}
+
+.operators button:last-child:hover {
+  color: #1e2326;
+  background-color: #fff;
+}
+
+.operators button:hover {
+  color: #1e2326;
+  background-color: #fec208;
+}
+/*# sourceMappingURL=style.css.map */
